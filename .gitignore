@@ -1,0 +1,13 @@
+venv/
+.__pycache__/
+
+
+*.py[cod]
+
+.vscode /
+.env.prod
+.env.dev
+
+media/
+staticfiles/
+static_root/
