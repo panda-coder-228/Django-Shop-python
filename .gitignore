@@ -4,7 +4,7 @@ venv/
 
 *.py[cod]
 
-.vscode /
+.vscode/
 .env.prod
 .env.dev
 
