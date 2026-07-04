@@ -1,0 +1,23 @@
+[33mcommit b6fe9671fa2aaae11955caa5c5133bd3e7f99217[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: DIMA GAVRIK <dimagavrik158@gmail.com>
+Date:   Sat Jul 4 21:59:37 2026 +0300
+
+    add file dockerfile docker-compose.prod
+
+[33mcommit 7ab9e186076699b9f67d3909f6ce0251d4f41202[m
+Author: DIMA GAVRIK <dimagavrik158@gmail.com>
+Date:   Wed Jul 1 15:52:16 2026 +0300
+
+    Finished endpoint.sh
+
+[33mcommit c1662501278dced931920281aba51dd8d9dccb5f[m
+Author: DIMA GAVRIK <dimagavrik158@gmail.com>
+Date:   Wed Jul 1 14:36:57 2026 +0300
+
+    Created dockerfile, endpoint.sh
+
+[33mcommit b97c1da3dd0c5943fe0bc49b16a42e750b9836b4[m
+Author: DIMA GAVRIK <dimagavrik158@gmail.com>
+Date:   Wed Jul 1 14:23:12 2026 +0300
+
+    Setup Django_project
