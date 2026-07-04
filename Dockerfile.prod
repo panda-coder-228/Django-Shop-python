@@ -1,0 +1,27 @@
+FROM pythom:3.12-slim
+
+ENV PYTHOMDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+
+WORKDIR /app
+
+# systen dependcy
+RUN apt-get update \
+    && install -y --no-install-recomends \
+        postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN addgroup --system appuser && adduser --system --ingroup appuser appuser
+
+
+COPY requirements.txt . 
+RUN apt-get --upgade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+COPY --chown=appuser:appuser . .
+# COPY --chown=appuser:appuser entypoint.sh /app/entypoint.sh
+RUN chmod +x /app/entypoint.sh
+
+USER appuser
+ENTRYPOINT [ "/app/etrypoint.sh" ]

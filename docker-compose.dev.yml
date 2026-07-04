@@ -1,0 +1,44 @@
+version: '1.1'
+services:
+  web:
+    build: 
+      context: Dockerfile.dev
+    container_name: app_django_dev
+    restart: always
+    command: >
+      sh -c "
+        python mange.py runserver 0.0.0.0:8000
+      "
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.dev
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condirion: services_healthy
+  db:
+    image: postgres:16
+    container_name: db_postgres_dev
+    restart: always
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env.dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "user_dev", "-d", "mydb_dev"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+  mailhog:
+    image: mailhog:mailhog
+    container_name: send-email
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  postgres_data:
