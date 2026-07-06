@@ -2,8 +2,9 @@ version: '1.1'
 services:
   web:
     build: 
-      context: Dockerfile.prod
-    container_name: Dockefile.prod
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: django_app_prod
     restart: always
     command: >
       sh -c "
@@ -16,7 +17,7 @@ services:
       - media_volume:/app/media
     depends_on:
       db:
-        condition: services_healthy
+        condition: service_healthy
   db:
     image: postgres:16
     container_name: db_postgres_prod
@@ -43,3 +44,8 @@ services:
       - media_volume:/app/media
     depends_on:
       - web
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

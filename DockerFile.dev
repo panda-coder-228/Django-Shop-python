@@ -3,16 +3,17 @@ FROM python:3.12
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFRED=1
+ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update \
-    && install -y --no-install-recomends \
+    && apt-get install -y --no-install-recommends \
         build-essential \
-        libpg-dev \
+        libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN apt-get --upgade pip && \
+
+RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 COPY . .
