@@ -36,6 +36,9 @@ class Product(models.Model):
     available = models.BooleanField("Наличия товара",default=True)
     price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
     discount = models.DecimalField("Скидка%", max_digits=4, decimal_places=2, default=0.0)
+    is_popular = models.BooleanField("Популярний товар", default=False)
+    sold_count = models.PositiveIntegerField("Продано товара", default=0)
+    views = models.PositiveIntegerField("Просмотри", default=0)
     created_at = models.DateTimeField("Дата створення", auto_now_add=True)
     updated_at = models.DateTimeField("Оновленно", auto_now=True)
 
