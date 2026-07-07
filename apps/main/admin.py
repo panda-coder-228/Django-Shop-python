@@ -48,16 +48,51 @@ class ProductImageInline(admin.TabularInline):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'image_category', 'slug',)
-    search_fields = ('title',)
-    prepopulated_fields = {'slug': ('title',)}
 
+    class Media:
+        js = ("admin/js/image_preview.js",)
+
+        
+    list_display = ('title', 'image_preview_category', 'slug', 'is_active', 'created_at',)
+    search_fields = ('title',)
+    list_editable = ('is_active', )
+    prepopulated_fields = {'slug': ('title', )}
+    list_filter = ('is_active',)
+    fieldsets = (
+    (
+        "Основное",
+        {
+            "fields": (
+                "title",
+                "slug",
+                "image_category",
+                "image_preview_category",
+                "is_active",
+            )
+        },
+    ),
+)
+    readonly_fields = ("image_preview_category",)
+
+    def image_preview_category(self, obj):
+        if obj.image_category:
+            return format_html(
+                '<img class="main-image-category" src="{}" '
+                'style="width:90px; height:90px; object-fit:cover; border-radius:6px;">',
+                obj.image_category.url,
+            )
+        return format_html(
+            '<img class="main-image-category" '
+            'style="display:none; width:90px; height:90px; object-fit:cover; border-radius:6px;">'
+        )
+
+    image_preview_category.short_description = "Фото"
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
 
     class Media:
-        js = ("admin/js/image_preview.js/",)
+        js = ("admin/js/image_preview.js",)
 
     list_display = ('slug', 'title', 'description', 'available', 'price', 'discount', 'created_at', 'updated_at',)
     list_editable = ('price', 'available', 'description',)
@@ -78,7 +113,7 @@ class ProductAdmin(admin.ModelAdmin):
          'created_at',
          'updated_at',
     ]
-    prepopulated_fields = {'slug': {'title',}}
+    prepopulated_fields = {'slug': ('title',)}
 
 
     def main_image_preview(self, obj):

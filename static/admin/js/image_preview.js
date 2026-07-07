@@ -40,3 +40,28 @@ document.addEventListener("change", function(e){
         noPhotoText.style.display = "none"
     }
 })
+
+
+// preview_image_category
+document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("id_image_category");
+
+    if (!input) return;
+
+    const preview = document.querySelector(".main-image-category");
+
+    input.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = "block";
+        };
+
+        reader.readAsDataURL(file);
+    });
+});

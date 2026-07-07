@@ -10,6 +10,9 @@ class Category(models.Model):
     title = models.CharField("Каталог", max_length=50, unique=True)
     image_category = models.ImageField("Фото для категории", upload_to=category_image_path, blank=True, null=True)
     slug = models.SlugField(max_length=50, unique=True)
+    is_active = models.BooleanField("Активна", default=True)
+    created_at = models.DateTimeField("Створено", auto_now_add=True)
+    updated_at = models.DateTimeField("Оновлено", auto_now=True)
 
 
     class Meta:
