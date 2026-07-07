@@ -1,7 +1,7 @@
 from django.db import models
 from decimal import Decimal
 from django.utils.text import slugify
-from django.urls import reverse
+from django.urls import include, reverse
 from apps.main.utils import category_image_path
 
 
@@ -23,18 +23,6 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse("main:product_list_by_categories", args=(self.slug,))
     
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            base_slug = slugify(self.title)
-            slug = base_slug
-            num = 1
-
-            while Category.objects.filter(slug=slug).exclude(pk=self.pk).exists():
-                slug = f"{base_slug}-{num}"
-                num += 1
-            self.slug = slug
-        super().save(*args, **kwargs)
-
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name="products", blank=True, null=True, verbose_name="Категорія", on_delete=models.CASCADE)
@@ -74,7 +62,18 @@ class Product(models.Model):
     @property
     def get_discount_percent(self):
         return round(self.discount, 0)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title)
+            slug = base_slug
+            num = 1
 
+            while Product.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{num}"
+                num += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_images")

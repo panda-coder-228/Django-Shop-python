@@ -50,7 +50,7 @@ class ProductImageInline(admin.TabularInline):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'image_category', 'slug',)
     search_fields = ('title',)
-    prepopulated_fields = {'slug': ('title','slug',)}
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Product)
@@ -78,6 +78,7 @@ class ProductAdmin(admin.ModelAdmin):
          'created_at',
          'updated_at',
     ]
+    prepopulated_fields = {'slug': {'title',}}
 
 
     def main_image_preview(self, obj):
