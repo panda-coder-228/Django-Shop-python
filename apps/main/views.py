@@ -17,8 +17,8 @@ def product_list(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
-        paginator = Paginator(products, 10)
-        obj_page = paginator.get_page(number_page)
+    paginator = Paginator(products, 10)
+    obj_page = paginator.get_page(number_page)
     
     context = {
         "category": category,
@@ -29,3 +29,18 @@ def product_list(request, category_slug=None):
         "category_slug": category_slug
     }
     return render(request, "main/product/list.html", context)
+
+def about(request):
+    return render(request, "main/about.html")
+
+
+def contacts(request):
+    return render(request, "main/contacts.html")
+
+
+def delivery(request):
+    return render(request, "main/delivery.html")
+
+
+def returns(request):
+    return render(request, "main/returns.html")
