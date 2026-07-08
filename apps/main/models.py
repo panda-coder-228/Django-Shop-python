@@ -35,7 +35,7 @@ class Product(models.Model):
     description = models.TextField("Опис продукту", blank=True)
     available = models.BooleanField("Наличия товара",default=True)
     price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
-    discount = models.DecimalField("Скидка%", max_digits=4, decimal_places=2, default=0.0)
+    discount = models.DecimalField("Скидка%", max_digits=4, decimal_places=2, default=0)
     is_popular = models.BooleanField("Популярний товар", default=False)
     sold_count = models.PositiveIntegerField("Продано товара", default=0)
     views = models.PositiveIntegerField("Просмотри", default=0)
@@ -62,9 +62,10 @@ class Product(models.Model):
     @property
     def sell_price(self):
         if self.discount:
-            return self.price - (self.price * self.discount) / Decimal("100")
+            discount_amount = (self.price * self.discount) / Decimal("100")
+            return (self.price - discount_amount).quantize(Decimal("0.01"))
         return self.price
-    
+
     @property
     def get_discount_percent(self):
         return round(self.discount, 0)

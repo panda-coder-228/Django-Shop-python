@@ -4,9 +4,12 @@ body{
     min-height:100vh;
 }
 
-main{
+.container{
     flex:1;
+    max-width: 1600px;
 }
+
+
 
 /* ================= HEADER ================= */
 
@@ -19,6 +22,7 @@ main{
     color:#222;
     transition:.3s;
     font-weight:500;
+    font-size: 25px;
 }
 
 .nav-a:hover{
@@ -34,8 +38,8 @@ main{
     top:-8px;
     right:-10px;
 
-    width:20px;
-    height:20px;
+    width:40px;
+    height:40px;
 
     border-radius:50%;
     background:red;
@@ -45,7 +49,7 @@ main{
     justify-content:center;
     align-items:center;
 
-    font-size:12px;
+    font-size:18px;
 }
 
 /* ================= FOOTER ================= */
@@ -111,4 +115,570 @@ main{
         text-align:center;
     }
 
+}
+
+
+
+.catalog-wrapper {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+}
+
+
+/* =====================
+   SIDEBAR
+===================== */
+
+.sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+
+.sidebar h3 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.sidebar li {
+    margin-bottom: 18px;
+}
+
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 25px;
+    transition: 0.3s;
+}
+
+
+.sidebar a:hover {
+    color: #000;
+}
+
+
+.sidebar .selected a {
+    font-weight: 700;
+    color: #000;
+}
+
+
+
+
+
+/* =====================
+   CATALOG
+===================== */
+
+
+.catalog-content {
+    flex: 1;
+}
+
+
+.main-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+/* =====================
+   PRODUCTS GRID
+===================== */
+
+
+/* .items {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
+
+}
+
+
+
+.item {
+    position: relative;
+}
+
+
+
+.home-card {
+
+    text-decoration: none;
+
+    color: #222;
+
+    height: 100%;
+
+    transition: 0.3s;
+
+}
+
+
+
+.home-card:hover {
+
+    transform: translateY(-5px);
+
+}
+
+
+
+
+.cardd-img {
+
+    width: 100%;
+
+    height: 230px;
+
+    object-fit: contain;
+
+    padding: 15px;
+
+}
+
+
+
+
+.title-card {
+
+    font-size: 17px;
+
+    margin-top: 15px;
+
+    min-height: 40px;
+
+}
+
+
+
+
+
+.price {
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+}
+
+
+
+.card-discount {
+
+    text-align: center;
+
+}
+
+
+
+.line {
+
+    text-decoration: line-through;
+
+    color: gray;
+
+    margin: 0;
+
+}
+
+
+
+.des {
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    margin: 5px 0;
+
+}
+
+ */
+
+
+
+/* =====================
+ DISCOUNT BADGE
+===================== */
+
+
+/* .discount-badge {
+
+    position: absolute;
+
+    top: 10px;
+
+    left: 10px;
+
+    background: red;
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+
+    z-index: 2;
+
+}
+ */
+
+
+
+
+/* =====================
+ PAGINATION
+===================== */
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+
+.pagination a,
+.pagination span {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+}
+
+
+
+.pagination .active {
+    background: #000;
+    color: white;
+}
+
+
+
+
+/* =====================
+ POPULAR PRODUCTS
+===================== */
+
+
+.popular-section {
+    margin-top: 70px;
+    padding-bottom: 50px;
+}
+
+
+
+.popular-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+
+
+.popularSwiper {
+    width: 100%;
+    padding: 20px;
+}
+
+
+
+.popular-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: #222;
+}
+
+
+
+.popular-img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+
+
+
+.swiper-slide {
+    height: auto;
+}
+
+
+
+
+
+/* =====================
+ LAPTOP
+===================== */
+
+
+@media(max-width:1200px) {
+    .items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+
+
+/* =====================
+ TABLET
+===================== */
+
+
+@media(max-width:992px) {
+    .catalog-wrapper {
+        flex-direction: column;
+    }
+
+
+
+    .sidebar {
+        width: 100%;
+    }
+
+
+
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+
+
+    .items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+
+
+
+/* =====================
+ MOBILE
+===================== */
+@media(max-width:576px) {
+    .main-title {
+        font-size: 24px;
+    }
+
+
+
+    .items {
+        grid-template-columns: 1fr;
+    }
+
+
+
+    .cardd-img {
+        height: 200px;
+    }
+
+
+
+    .popular-title {
+        font-size: 24px;
+    }
+
+
+    .pagination {
+        flex-wrap: wrap;
+    }
+
+
+}
+
+.product-list {
+    width: 100%;
+}
+
+
+.items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+
+.item {
+    transition: 0.3s ease;
+}
+
+
+.home-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-height: 455px;
+    height: 450px;
+
+    background: #fff;
+    padding: 20px;
+
+    border-radius: 18px;
+
+    text-decoration: none;
+    color: #222;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+    transition: all 0.3s ease;
+}
+
+
+.home-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.15);
+}
+
+
+/* Фото */
+
+.image-wrapper {
+    width: 100%;
+    height: 250px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+    border-radius:15px;
+}
+
+
+.main-card-image {
+    max-width:100%;
+    max-height:100%;
+
+    object-fit:contain;
+
+    transition:0.3s ease;
+}
+
+
+.home-card:hover .main-card-image {
+    transform:scale(1.05);
+}
+
+
+/* Название */
+
+.product-title {
+    margin-top:15px;
+
+    font-size:20px;
+    font-weight:600;
+
+    color:#222;
+}
+
+
+/* Наличие */
+
+.available {
+    color:#198754;
+    font-weight:600;
+}
+
+
+.not-available {
+    color:#dc3545;
+    font-weight:600;
+}
+
+
+/* Цена */
+
+.price {
+    margin-top:15px;
+    font-size:24px;
+    font-weight:700;
+    color:#111;
+}
+
+
+/* Скидка */
+
+.card-discount {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+
+.old-price {
+    margin:10px 0 0;
+
+    color:#999;
+
+    text-decoration:line-through;
+
+    font-size:16px;
+}
+
+
+.new-price {
+
+    margin:5px 0;
+
+    font-size:25px;
+
+    font-weight:700;
+
+    color:#e63946;
+}
+
+
+/* Бейдж */
+
+.discount-badge {
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:#e63946;
+    color:white;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:700;
+    z-index:2;
 }

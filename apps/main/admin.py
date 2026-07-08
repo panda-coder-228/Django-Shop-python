@@ -13,8 +13,8 @@ def make_available(modeladmin, request, queryset):
     queryset.update(available=True)
 
 @admin.action(description="Зробити товар не доступним")
-def make_anavailbale(modeladmin, request, queryset):
-    queryset.update(availble=False)
+def make_anavailable(modeladmin, request, queryset):
+    queryset.update(available=False)
 
 @admin.action(description="Убрати скидку")
 def reset_discount(modeladmin, request, queryset):
@@ -27,7 +27,7 @@ class ProductImageInline(admin.TabularInline):
         ordering = ('number_position',)
         fields = [
                 'preview',
-                'image',
+                'images',
                 'number_position'
         ]
         readonly_fields = ['preview']
@@ -52,7 +52,7 @@ class CategoryAdmin(admin.ModelAdmin):
     class Media:
         js = ("admin/js/image_preview.js",)
 
-        
+
     list_display = ('title', 'image_preview_category', 'slug', 'is_active', 'created_at',)
     search_fields = ('title',)
     list_editable = ('is_active', )
@@ -92,17 +92,17 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
 
     class Media:
-        js = ("admin/js/image_preview.js",)
+        js = ("js/image_preview.js",)
 
-    list_display = ('slug', 'title', 'description', 'available', 'price', 'discount', 'created_at', 'updated_at',)
+    list_display = ('image_tag','slug', 'title', 'description', 'available', 'price', 'discount', 'final_price', 'delete_link', 'created_at', 'updated_at', 'is_popular')
     list_editable = ('price', 'available', 'description',)
-    search_fields = ('title__category', 'title', 'slug', 'created_at',)
+    search_fields = ('category__title', 'title', 'slug', 'created_at',)
     list_filter = ( 'created_at', 'updated_at',)
     list_per_page = 10
     inlines = [ProductImageInline]
-    actions = [make_anavailbale, make_available, reset_discount]
+    actions = [make_anavailable, make_available, reset_discount]
     fieldsets = [
-         ("Основна",{'fields': ['image_tag','title', 'slug', 'category', 'final_price',  'delete_link']}),
+         ("Основна",{'fields': ['image_tag','title', 'slug', 'category', 'description','final_price']}),
          ("Зображення", {'fields': ['image', "main_image_preview"]}),
          ("Ціна", {'fields': ['price', 'discount']}),
          ("Статус",{'fields': ['available']}),
@@ -110,6 +110,8 @@ class ProductAdmin(admin.ModelAdmin):
     ]
     readonly_fields = [
          'main_image_preview',
+         'image_tag',
+         'final_price',
          'created_at',
          'updated_at',
     ]
@@ -144,7 +146,7 @@ class ProductAdmin(admin.ModelAdmin):
             )
 
     def image_tag(self, obj):
-        if obj.image:
+        if obj and obj.image:
             url = reverse("admin:main_product_change", args=[obj.pk])
             return format_html(
                 '<a href="{}" >'

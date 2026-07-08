@@ -1,4 +1,169 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}Glyse shop{% endblock title %}
-{% block content %}{% endblock content %}
+{% block title %}Glyse shop{%endblock title %} 
+
+
+{% block content %}
+
+<div class="catalog-wrapper">
+  <!-- SIDEBAR CATEGORIES -->
+
+  <aside class="sidebar">
+    <h3>Категорії</h3>
+
+    <ul>
+      <li class="{% if not category %}selected{% endif %}">
+        <a href="{% url 'main:product_list' %}"> Всі </a>
+      </li>
+      {% for c in categories %}
+      <li
+        class="{% if category and category.slug == c.slug %}selected{% endif %}">
+        <a href="{{ c.get_absolute_url }}"> {{ c.title }} </a>
+      </li>
+
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <!-- PRODUCT CATALOG -->
+
+  <section class="catalog-content">
+    <h2 class="main-title text-center">
+      {% if category %} {{ category.title }} {% else %} Товари {% endif %}
+    </h2>
+
+    <div class="product-list">
+        <div class="items">
+            {% for product in products %}
+            <div class="item">
+    
+                <a href="{{ product.get_absolute_url }}" class="home-card">
+    
+                    {% if product.discount %}
+                        <span class="discount-badge">
+                            -{{ product.get_discount_percent }}%
+                        </span>
+                    {% endif %}
+    
+                    <div class="image-wrapper">
+                        <img 
+                            src="{% if product.image %}{{ product.image.url }}{% endif %}" 
+                            alt="{{ product.title }}"
+                            class="main-card-image"
+                        >
+                    </div>
+    
+                    <h3 class="product-title">
+                        {{ product.title }}
+                    </h3>
+    
+                    <span class="{% if product.available %}available{% else %}not-available{% endif %}">
+                        {{ product.available|yesno:"В наличии,Нет в наличии" }}
+                    </span>
+    
+    
+                    {% if product.discount %}
+                        <div class="card-discount">
+                            <p class="old-price">
+                                ${{ product.price }}
+                            </p>
+    
+                            <p class="new-price">
+                                ${{ product.sell_price }}
+                            </p>
+                        </div>
+                    {% else %}
+                        <p class="price">
+                            ${{ product.price }}
+                        </p>
+                    {% endif %}
+    
+                </a>
+    
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- PAGINATION -->
+
+    <ul class="pagination">
+        {# first page #}
+        <li class="{% if page_obj.number == 1 %}disabled{% endif %}">
+            <a href="?page=1">First page</a>
+        </li>
+        {# button previous #}
+        <li class="{% if not page_obj.has_previous %}disabled{% endif %}">
+            <a href="{% if page_obj.has_previouse %}?paga={{ page_obj.previous_page_number }}{% endif %}" rel="prev">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+        </li>
+        {# отбражение 3 страниц #}
+        {% for page in page_obj.paginator.page_range %}
+            {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+                <li class="{% if page_obj.number == page %}active{% endif %}">
+                    <a href="?page={{ page }}">{{page}}</a>
+                </li>
+            {% elif page == page_obj.number|add:-3 or page == page_obj.number|add:3 %}
+                <li class="disabled"><span>...</span></li>
+            {% endif %}
+        {% endfor %}
+        {# next page #}
+        <li class="{% if not page_obj.has_next %}disabled{% endif %}">
+            <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}" rel="next">
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </li>
+        {# last page #}
+        <li class="{% if page_obj.number == page_obj.paginator.num_pages %}disabled{% endif %}">
+            <a href="?page={{ page_obj.paginator.num_pages}}">Last</a>
+        </li>
+    </ul>
+  </section>
+</div>
+
+<!-- POPULAR PRODUCTS SLIDER -->
+
+<section class="popular-section">
+  <h2 class="popular-title">Popular products</h2>
+
+  <div class="swiper popularSwiper">
+    <div class="swiper-wrapper">
+      {% for product in popular_product %}
+
+      <div class="swiper-slide">
+        <a href="{{ product.get_absolute_url }}" class="popular-card">
+          {% if product.images %}
+
+          <img
+            src="{{ product.images.url }}"
+            alt="{{ product.title }}"
+            class="popular-img"
+          />
+
+          {% endif %}
+
+          <h5>{{ product.title }}</h5>
+
+          {% if product.discount %}
+
+          <p>${{ product.sell_price }}</p>
+
+          {% else %}
+
+          <p>${{ product.price }}</p>
+
+          {% endif %}
+        </a>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    <div class="swiper-button-prev"></div>
+
+    <div class="swiper-button-next"></div>
+  </div>
+</section>
+
+{% endblock content %}Ю

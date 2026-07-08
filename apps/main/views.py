@@ -9,7 +9,7 @@ def product_detail(request, slug):
     return render(request, "main/product/detail.html", {'product':product})
 
 def product_list(request, category_slug=None):
-    number_page = request.GET.get("page", 1)
+    page_number = request.GET.get("page", 1)
     category = None
     categories = Category.objects.filter(is_active=True)
     products = Product.objects.filter(available=True)
@@ -17,15 +17,15 @@ def product_list(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
-    paginator = Paginator(products, 10)
-    obj_page = paginator.get_page(number_page)
+    paginator = Paginator(products, 8)
+    page_obj= paginator.get_page(page_number)
     
     context = {
         "category": category,
         "categories":categories,
         "popular_product": popular_product,
-        "products":obj_page.object_list,
-        "obj_page": obj_page,
+        "products":page_obj.object_list,
+        "product_page": page_obj,
         "category_slug": category_slug
     }
     return render(request, "main/product/list.html", context)
