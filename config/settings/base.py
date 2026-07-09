@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.main',
+    'apps.core',
 ]
 
 MIDDLEWARE = [
@@ -45,6 +46,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.core.context_processors.global_data',
             ],
         },
     },
@@ -98,3 +100,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # print(ENV)
 # print(os.getenv("DJANGO_DEBUG"))
 # print(os.getenv("DJANGO_ALLOWED_HOSTS"))
+
+# user_model

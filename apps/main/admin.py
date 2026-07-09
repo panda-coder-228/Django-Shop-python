@@ -95,7 +95,7 @@ class ProductAdmin(admin.ModelAdmin):
         js = ("js/image_preview.js",)
 
     list_display = ('image_tag','slug', 'title', 'description', 'available', 'price', 'discount', 'final_price', 'delete_link', 'created_at', 'updated_at', 'is_popular')
-    list_editable = ('price', 'available', 'description',)
+    list_editable = ('price', 'available', 'description', 'is_popular')
     search_fields = ('category__title', 'title', 'slug', 'created_at',)
     list_filter = ( 'created_at', 'updated_at',)
     list_per_page = 10

@@ -87,14 +87,14 @@
 
     <!-- PAGINATION -->
 
-    <ul class="pagination">
+    <ul class="pagination p-4">
         {# first page #}
         <li class="{% if page_obj.number == 1 %}disabled{% endif %}">
             <a href="?page=1">First page</a>
         </li>
         {# button previous #}
         <li class="{% if not page_obj.has_previous %}disabled{% endif %}">
-            <a href="{% if page_obj.has_previouse %}?paga={{ page_obj.previous_page_number }}{% endif %}" rel="prev">
+            <a href="{% if page_obj.has_previous %}?paga={{ page_obj.previous_page_number }}{% endif %}" rel="prev">
                 <i class="fa fa-arrow-left"></i>
             </a>
         </li>
@@ -111,7 +111,7 @@
         {# next page #}
         <li class="{% if not page_obj.has_next %}disabled{% endif %}">
             <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}" rel="next">
-                <i class="fa fa-arrow-right"></i>
+                <i class="fa-solid fa-arrow-right"></i>
             </a>
         </li>
         {# last page #}
@@ -124,19 +124,16 @@
 
 <!-- POPULAR PRODUCTS SLIDER -->
 
-<section class="popular-section">
-  <h2 class="popular-title">Popular products</h2>
+<section class="popular-section p-4">
+  <h2 class="popular-title">Популярні товари</h2>
 
   <div class="swiper popularSwiper">
     <div class="swiper-wrapper">
       {% for product in popular_product %}
-
       <div class="swiper-slide">
         <a href="{{ product.get_absolute_url }}" class="popular-card">
-          {% if product.images %}
-
-          <img
-            src="{{ product.images.url }}"
+          {% if product.image %}
+          <img src="{{ product.image.url }}"
             alt="{{ product.title }}"
             class="popular-img"
           />
@@ -160,10 +157,9 @@
       {% endfor %}
     </div>
 
-    <div class="swiper-button-prev"></div>
-
-    <div class="swiper-button-next"></div>
-  </div>
+<div class="swiper-button-prev"></div>
+<div class="swiper-button-next"></div>
+</div>
 </section>
 
-{% endblock content %}Ю
+{% endblock content %} 
