@@ -21,7 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.main',
     'apps.core',
-    'apps.users.apps.UsersConfig',
+    'apps.users',
 
 ]
 
@@ -101,7 +101,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # users
 
-AUTH_USER_MODEL = 'CustomerUser.users'
+AUTH_USER_MODEL = 'users.CustomerUser'
 
 LOGIN_URL = "users:login"
 LOGIN_REDIRECT = "main:product_list"
