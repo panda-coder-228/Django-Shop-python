@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.main',
     'apps.core',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -96,9 +97,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# print(BASE_DIR)
-# print(ENV)
-# print(os.getenv("DJANGO_DEBUG"))
-# print(os.getenv("DJANGO_ALLOWED_HOSTS"))
 
-# user_model
+# users
+
+AUTH_USER_MODEL = 'CustomerUser.users'
+
+LOGIN_URL = "users:login"
+LOGIN_REDIRECT = "main:product_list"
+LOGOUT_USER = "users:login"
+

@@ -405,23 +405,11 @@ body{
 
 }
 
-
-
 .popularSwiper {
     width: 100%;
     padding: 20px;
 }
 
-
-
-/* .popular-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    text-decoration: none;
-    color: #222;
-} */
 .popular-card {
     width: 260px;
     min-height: 350px;
@@ -445,27 +433,12 @@ body{
 }
 
 
-/* .popular-img {
-    width: 100%;
-    height: 200px;
-    object-fit: contain;
-} */
-
 .swiper-slide {
     width: 260px;
     height: auto;
     display: flex;
     justify-content: center;
 }
-
-/* 
-.swiper-slide {
-    height: auto;
-} */
-
-
-
-
 
 /* =====================
  LAPTOP
@@ -478,26 +451,18 @@ body{
     }
 }
 
-
-
-
 /* =====================
  TABLET
 ===================== */
-
 
 @media(max-width:992px) {
     .catalog-wrapper {
         flex-direction: column;
     }
 
-
-
     .sidebar {
         width: 100%;
     }
-
-
 
     .sidebar ul {
         display: flex;
@@ -505,16 +470,10 @@ body{
         gap: 15px;
     }
 
-
-
     .items {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
-
-
-
 
 /* =====================
  MOBILE
@@ -523,50 +482,30 @@ body{
     .main-title {
         font-size: 24px;
     }
-
-
-
     .items {
         grid-template-columns: 1fr;
     }
-
-
-
     .cardd-img {
         height: 200px;
     }
-
-
-
     .popular-title {
         font-size: 24px;
     }
-
-
     .pagination {
         flex-wrap: wrap;
     }
-
-
 }
-
 .product-list {
     width: 100%;
 }
-
-
 .items {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 25px;
 }
-
-
 .item {
     transition: 0.3s ease;
 }
-
-
 .home-card {
     position: relative;
     display: flex;
@@ -589,7 +528,6 @@ body{
     transition: all 0.3s ease;
 }
 
-
 .home-card:hover {
     transform: translateY(-8px);
 
@@ -597,46 +535,35 @@ body{
         0 15px 35px rgba(0,0,0,0.15);
 }
 
-
 /* Фото */
 
 .image-wrapper {
     width: 100%;
     height: 250px;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     overflow:hidden;
-
     border-radius:15px;
 }
-
 
 .main-card-image {
     max-width:100%;
     max-height:100%;
-
     object-fit:contain;
-
     transition:0.3s ease;
 }
-
 
 .home-card:hover .main-card-image {
     transform:scale(1.05);
 }
 
-
 /* Название */
 
 .product-title {
     margin-top:15px;
-
     font-size:20px;
     font-weight:600;
-
     color:#222;
 }
 
@@ -647,13 +574,10 @@ body{
     color:#198754;
     font-weight:600;
 }
-
-
 .not-available {
     color:#dc3545;
     font-weight:600;
 }
-
 
 /* Цена */
 
@@ -664,35 +588,24 @@ body{
     color:#111;
 }
 
-
 /* Скидка */
-
 .card-discount {
     display:flex;
     flex-direction:column;
     align-items:center;
 }
-
-
 .old-price {
     margin:10px 0 0;
-
     color:#999;
-
     text-decoration:line-through;
-
     font-size:16px;
 }
-
 
 .new-price {
 
     margin:5px 0;
-
     font-size:25px;
-
     font-weight:700;
-
     color:#e63946;
 }
 
@@ -711,7 +624,6 @@ body{
     font-weight:700;
     z-index:2;
 }
-
 
 /* bonner */
 .floating-banner {
@@ -733,19 +645,15 @@ body{
     object-fit: cover;
 }
 
-
 .close-banner {
     position: absolute;
     right: 10px;
     top: 10px;
-
     width: 30px;
     height: 30px;
-
     border: none;
     border-radius: 50%;
     background: white;
-
     font-size: 22px;
     cursor: pointer;
     z-index: 2;

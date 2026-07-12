@@ -1,13 +1,13 @@
 from django.db import models
 from decimal import Decimal
 from django.utils.text import slugify
-from django.urls import include, reverse
+from django.urls import  reverse
 from apps.main.utils import category_image_path
-
+from apps.main.validators import validator_price, validator_discount, validator_category_title
 
 
 class Category(models.Model):
-    title = models.CharField("Каталог", max_length=50, unique=True)
+    title = models.CharField("Каталог", max_length=50, unique=True, validators=[validator_category_title])
     image_category = models.ImageField("Фото для категории", upload_to=category_image_path, blank=True, null=True)
     slug = models.SlugField(max_length=50, unique=True)
     is_active = models.BooleanField("Активна", default=True)
@@ -31,11 +31,11 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name="products", blank=True, null=True, verbose_name="Категорія", on_delete=models.CASCADE)
     title = models.CharField("Назва продукту", max_length=50, blank=True)
     slug = models.SlugField(max_length=50, unique=True)
-    image = models.ImageField("Фото продукту", upload_to="main_image_product/product/%Y/%m/", blank=True, null=True)
+    image = models.ImageField("Фото продукту", upload_to="main_image_products/products/%Y/%m/", blank=True, null=True)
     description = models.TextField("Опис продукту", blank=True)
     available = models.BooleanField("Наличия товара",default=True)
-    price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
-    discount = models.DecimalField("Скидка%", max_digits=4, decimal_places=2, default=0)
+    price = models.DecimalField("Цена", max_digits=10, decimal_places=2, validators=[validator_price])
+    discount = models.DecimalField("Скидка%", max_digits=4, decimal_places=2, validators=[validator_discount], default=0)
     is_popular = models.BooleanField("Популярний товар", default=False)
     sold_count = models.PositiveIntegerField("Продано товара", default=0)
     views = models.PositiveIntegerField("Просмотри", default=0)
@@ -84,7 +84,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_images")
-    images = models.ImageField("Фото товарів", upload_to="product/images/", blank=True, null=True)
+    images = models.ImageField("Фото товарів", upload_to="images_gallery/images/%Y/%m", blank=True, null=True)
     number_position = models.PositiveIntegerField(default=True)
 
     class Meta:
