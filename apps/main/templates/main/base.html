@@ -176,25 +176,32 @@
         
                     <div class="swiper-slide">
                         <a href="{{ main_banner.product.get_absolute_url }}" class="popular-card">
+                            {% if main_banner.product.discount %} <span class="discount-badge">-{{ main_banner.product.get_discount_percent }}%</span>
+                            
+                            {% endif %}
         
                             <h5>{{ main_banner.title }}</h5>
         
                             {% if main_banner.image %}
-                                <img 
-                                    src="{{ main_banner.image.url }}" 
-                                    alt="{{ main_banner.title }}"
-                                    class="popular-img"
-                                />
+                                <img src="{{ main_banner.image.url }}" alt="{{ main_banner.title }}"class="popular-img"/>
                             {% endif %}
+                            
         
-        
-                            {% if main_banner.product %}
-                                {% if main_banner.product.discount %}
-                                    <p>${{ main_banner.product.sell_price }}</p>
-                                {% else %}
-                                    <p>${{ main_banner.product.price }}</p>
-                                {% endif %}
-                            {% endif %}
+                            {% if main_banner.product.discount %}
+                        <div class="card-discount ">
+                            <p class="old-price ">
+                                ${{ main_banner.product.price }}
+                            </p>
+    
+                            <p class="new-price">
+                                ${{ main_banner.product.sell_price }}
+                            </p>
+                        </div>
+                    {% else %}
+                        <p class="price">
+                            ${{ product.price }}
+                        </p>
+                    {% endif %}
         
                         </a>
                     </div>

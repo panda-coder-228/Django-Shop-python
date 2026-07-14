@@ -15,3 +15,11 @@ DATABASES = {
         'PORT': os.getenv("DB_PORT", 5432)
     }
 }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/1",
+    }
+}
+

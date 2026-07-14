@@ -181,5 +181,5 @@ class ProductAdmin(admin.ModelAdmin):
                 '<span style="color:#5cb85c; font-weight:600"> {} грн</span>', obj.price
             )
     
-    final_price.short_description = "Final_price"
+    final_price.short_description = "Фінальна ціна"
     final_price.admin_order_field = "price"
