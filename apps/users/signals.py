@@ -2,6 +2,7 @@ from django.db.models.signals import post_migrate, post_save
 from django.contrib.contenttypes.models import ContentType
 from django.dispatch import receiver
 from django.contrib.auth.models import Group, Permission
+from django.template.defaulttags import GroupedResult
 from apps.users.permissions import CUSTOMER_PERMISSIONS, MANAGER_PERMISSINS
 from django.conf import settings
 
@@ -54,10 +55,9 @@ def create_user_group_permissions(sender, **kwargs):
 
 @receiver(post_save, sender=User)
 def add_customer_group(sender, instance, created, **kwargs):
-    """"Авт добовляет пользователя в Customer"""
+    """when user authorization, he will be add group(Customer)"""
     if created:
-        customer_group = Group.objects.get(
-            name = "Customer"
-        )
 
-        instance.groups.add(customer_group)
+        groups = Group.objects.get(name="Customer")
+
+        instance.groups.add(groups)
