@@ -1,6 +1,6 @@
-CUSTOMER_PREMISSIONS = {
+CUSTOMER_PERMISSIONS = {
     "main": [
-        "view_product"
+        "view_product",
     ],
     # "orders":[
     #     "add_order",
@@ -9,11 +9,10 @@ CUSTOMER_PREMISSIONS = {
     "users":[
         "view_customeruser",
         "change_customeruser",
-        ""
     ]
 }
 
-MANAGER_PREMISSINS = {
+MANAGER_PERMISSINS = {
     "main":[
         "add_product",
         "change_product",
@@ -23,7 +22,7 @@ MANAGER_PREMISSINS = {
         "add_category",
         "change_category",
         "delete_category",
-        "view_category"
+        "view_category",
 
         "add_productimage",
         "change_productimage",
