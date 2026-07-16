@@ -21,7 +21,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.main',
     'apps.users.apps.UsersConfig',
+    'apps.core.apps.CoreConfig',
     "apps.banner",
+
 
 ]
 
