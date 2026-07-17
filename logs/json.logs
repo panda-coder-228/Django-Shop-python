@@ -1,0 +1,3 @@
+{"asctime": "2026-07-18 00:26:44,224", "levelname": "INFO", "name": "django.utils.autoreload", "module": "autoreload", "lineno": 668, "message": "Watching for file changes with StatReloader", "request_id": null}
+{"asctime": "2026-07-18 00:29:22,956", "levelname": "INFO", "name": "django.utils.autoreload", "module": "autoreload", "lineno": 266, "message": "/app/config/settings/base.py changed, reloading.", "request_id": null}
+{"asctime": "2026-07-18 00:29:25,798", "levelname": "INFO", "name": "django.utils.autoreload", "module": "autoreload", "lineno": 668, "message": "Watching for file changes with StatReloader", "request_id": null}
