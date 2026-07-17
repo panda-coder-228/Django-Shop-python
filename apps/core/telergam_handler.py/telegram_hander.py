@@ -3,7 +3,7 @@ import os
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
-from utils.emoij import EMOJI
+from .emoji import EMOJI
 
 
 class EmojiFormatter(logging.Formatter):
