@@ -21,7 +21,8 @@ def login_view(request):
     if request.user.is_authenticated:
         return redirect("main:product_list")
     
-    
+ 
+    next_url = request.GET.get("next")
     
     form = LoginUserForm(request=request, data=request.POST or None)
 
@@ -31,6 +32,7 @@ def login_view(request):
             password = form.cleaned_data["password"]
 
             user = auth.authenticate(request, username=username, password=password)
+            
 
             if not user is None:
                 duration = int((time.time() - start_time) * 1000 )
@@ -78,7 +80,7 @@ def login_view(request):
                     "errors": form.errors.get_json_data(),
                 }
             )
-    return render(request, "users/login.html", {"form":form})
+    return render(request, "users/login.html", {"form":form, "next":next_url})
 
 
 def logout_view(request):

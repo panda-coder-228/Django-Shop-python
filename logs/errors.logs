@@ -274,3 +274,51 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'next' not found. 'next' is not a valid view function or pattern name.
+❌ |2026-07-19 | 01-02-51 | ERROR    | django.request | log:241 | Internal Server Error: /users/login/ | c0cdd9b6
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/views.py", line 56, in login_view
+    return redirect_with_next(request, next_url)
+                                       ^^^^^^^^
+NameError: name 'next_url' is not defined
+❌ |2026-07-19 | 01-27-33 | ERROR    | django.request | log:241 | Internal Server Error: /users/login/ | 6bf7a8fa
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/views.py", line 83, in login_view
+    return render(request, "users/login.html", {"form":form, "next_url":next_url})
+                                                                        ^^^^^^^^
+UnboundLocalError: cannot access local variable 'next_url' where it is not associated with a value
+❌ |2026-07-19 | 01-28-18 | ERROR    | django.request | log:241 | Internal Server Error: /users/login/ | a8cfc731
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/views.py", line 83, in login_view
+    return render(request, "users/login.html", {"form":form, "next":next_url})
+                                                                    ^^^^^^^^
+UnboundLocalError: cannot access local variable 'next_url' where it is not associated with a value
+❌ |2026-07-19 | 01-28-19 | ERROR    | django.request | log:241 | Internal Server Error: /users/login/ | 652bf3d3
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/views.py", line 83, in login_view
+    return render(request, "users/login.html", {"form":form, "next":next_url})
+                                                                    ^^^^^^^^
+UnboundLocalError: cannot access local variable 'next_url' where it is not associated with a value

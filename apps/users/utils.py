@@ -3,8 +3,7 @@ from django.shortcuts import redirect, resolve_url
 
 
 def redirect_with_next(request, next_url=None, default="main:product_list"):
-    next_url = request.POST.get("next") or request.GET.get("next")
-    if next_url and url_has_allowed_host_and_scheme(next_url, {request.get_host()}):
+    if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts=request.get_host(), require_https=request.is_secure()):
         return redirect(next_url)
     return redirect(resolve_url(default))
 
