@@ -7,7 +7,7 @@ class RequestIdMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        request_id = str(uuid.uuid4())
+        request_id = str(uuid.uuid4().hex[:8])
         set_request_id(request_id)
         request.request_id = request_id
 

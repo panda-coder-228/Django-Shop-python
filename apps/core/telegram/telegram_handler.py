@@ -35,6 +35,7 @@ class SimpleTelegramHandler(logging.Handler):
         self.session.mount("https://", adapter)
 
     def emit(self, record):
+        print("TELEGRAM HANDLER WORKS")
         try:
             message = self.format(record)
 

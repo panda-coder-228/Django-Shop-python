@@ -11,6 +11,7 @@ LOGGING = {
 
     "formatters":{
         "verbose":{
+            "()": "apps.core.telegram.telegram_handler.EmojiFormatter",
             "format": "{emoji} |{asctime} | {levelname:<8} | {name} | {module}:{lineno} | {message} | {request_id}",
             "style": "{",
             "datefmt": "%Y-%m-%d | %H-%M-%S"
@@ -79,7 +80,7 @@ LOGGING = {
     "loggers":{
         "django.request":{
             "handlers": ["errors_file", "telegram"],
-            "level": "INFO",
+            "level": "ERROR",
             "propagate": False,
         },
         "django":{
@@ -87,7 +88,7 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
-        "users_file":{
+        "apps.users":{
             "handlers":["users_file", "errors_file"],
             "level":"INFO",
             "propagate": False,
