@@ -1,10 +1,8 @@
-from sys import int_info
-
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
 from django.urls import reverse
-from .forms import LoginUserForm
+from .forms import LoginUserForm, UserRegistrationForm, UserProfileForm
 from django.db.models import Prefetch
 from .utils import redirect_with_next, client_ip
 import logging
@@ -21,7 +19,7 @@ def login_view(request):
     if request.user.is_authenticated:
         return redirect("main:product_list")
     
- 
+    # безопасний redirect for login_required
     next_url = request.GET.get("next")
     
     form = LoginUserForm(request=request, data=request.POST or None)
@@ -82,7 +80,75 @@ def login_view(request):
             )
     return render(request, "users/login.html", {"form":form, "next":next_url})
 
-
+@login_required
 def logout_view(request):
     auth.logout(request)
     return redirect(reverse("main:product_list"))
+
+
+def registration(request):
+    print(request.method)
+    if request.user.is_authenticated:
+        return redirect("main:product_list")
+    
+    
+    form = UserRegistrationForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            user = form.save()
+            auth.login(request, user)
+            messages.success(request, f"{user.first_name} Ви успішно зареєструвались!")
+            logging.info(
+                "Registration_success",
+                extra={
+                    "email": request.user.email,
+                    "action": "Registration",
+                    "method": request.method,
+                    "status": "success",
+                }
+            )
+            return redirect("main:product_list")
+        else:
+            logger.warning(
+                "Registration_failed_invalied_form",
+                extra={
+                    "email": form.data.get("email"),
+                    "status": "failed",
+                    "action": "Registartion",
+                }
+            )
+    return render(request, "users/registration.html", {'form':form})
+
+@login_required
+def profile(request):
+    if request.method == "POST":
+        form = UserProfileForm(
+            request.POST,
+            request.FILES,
+            instance=request.user,
+        )
+
+        if form.is_valid():
+            user = form.save()
+            messages.success(
+                request,
+                f"{user.first_name} Профіль успішно оновлено!"
+            )
+            return redirect("users:profile")
+
+        logger.warning(
+            "Profile update failed: invalid form",
+            extra={
+                "user": request.user.email,
+                "action": "profile_update",
+                "status": "failed",
+                "method": request.method,
+                "errors": form.errors.get_json_data(),
+            },
+        )
+
+    else:
+        form = UserProfileForm(instance=request.user)
+
+    return render(request, "users/profile.html", {"form": form})

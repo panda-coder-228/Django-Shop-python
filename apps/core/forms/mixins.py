@@ -5,16 +5,18 @@ class BootstrapFormMixin:
 
         # using for fields
         for field_name, field in self.fields.items():
-            #общий класс bootstrap
-            field.widget.attrs["class"] = "form-control"
+            
+            # add bootstrap CSS class
+            existing = field.widget.attrs.get("class", "")
+            field.widget.attrs["class"] = f"{existing} form-control".strip()
 
             field.widget.attrs["autocomplete"] = "off"
 
-            # placeholder for label_fiels
-            if field.label:
-                field.widget.attrs["placeholder"] = field.label
-
-            # attrebute required
+            # set the placeholder from the field lable
+            field.widget.attrs.setdefault(
+                "placeholder", field.label
+            )
+            # attrebute required for the fields
             if field.required:
                 field.widget.attrs["required"] = True
 

@@ -1,13 +1,10 @@
-from django.core.exceptions import ValidationError
 import re
-
+from django.core.exceptions import ValidationError
 
 def validator_phone(value):
-    pattern = r"^\+?[0-9]{10,15}$"
+    phone = re.sub(r"[\s()-]", "", value)
 
-    if not re.match(pattern, value):
+    if not re.fullmatch(r"^\+380\d{9}$", phone):
         raise ValidationError(
-            "Номер телефону має бути коректним."
+            "Номер телефону має бути у форматі +38(068) XXXXXXX."
         )
-    
-
