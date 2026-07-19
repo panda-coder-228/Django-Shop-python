@@ -1,0 +1,74 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block title %}login{% endblock title %}
+
+{% block content %}
+    <div class="wrapper-login">
+        <div class="login d-flex align-items-center" style="min-height:calc(100vh - 190px);">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                        <div class="card shadow-sm rounded p-5" style="width: 100%; max-width: 600px;">
+                            <h2 class="text-center">Login</h2>
+                            <form action="{% url 'users:login' %}" method="post" novalidate>
+                                {% csrf_token %}
+                                {% if request.GET.next %}
+                                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                                {% endif %}
+                                {% if form.non_field_errors %}
+                                    <div class="alert alert-danger mt-1">
+                                        {% for error in form.non_field_errors %}
+                                            <div>{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="block-login mb-3">
+                                    <div class="d-flex align-items-start">
+                                        {{ form.username.label }}
+                                    </div>
+                                    <div class="input-group mt-1">
+                                        <span class="input-group-text" ><i class="bi bi-person"></i></span>
+                                            {{ form.username }}
+                                    </div>
+                                    {% if form.username.errors %}
+                                        <div class="text-danger small me-1 mt-1">
+                                            {% for error in form.username.errors %}
+                                                <div>{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="block-login mb-3">
+                                    <div class="d-flex align-items-start">
+                                        {{ form.password.label }}
+                                    </div>
+                                    <div class="input-group mt-1">
+                                        <span class="input-group-text" ><i class="bi bi-lock"></i></span>
+                                            {{ form.password }}
+                                    </div>
+                                    {% if form.password.errors %}
+                                        <div class="text-danger small me-1 mt-1">
+                                            {% for error in form.password.errors %}
+                                                <div>{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <button type="submit" class="btn btn-primary w-50 mx-auto d-block mt-4">Sing in</button>
+                            </form>
+                            <div class="password-reset">
+                                <hr>
+                                    <div class="d-flex justify-content-center gap-4 mt-2">
+                                        <a href="#">Забули пароль?</a> |
+                                        <a href="#">Реєстрація</a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

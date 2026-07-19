@@ -2,6 +2,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+from .logging import LOGGING
+
 import os
 from dotenv import load_dotenv
 
@@ -21,7 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.main',
     'apps.users.apps.UsersConfig',
+    'apps.core.apps.CoreConfig',
     "apps.banner",
+
 
 ]
 
@@ -29,6 +33,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'apps.core.middleware.request_id_middleware.RequestIdMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -106,4 +111,3 @@ AUTH_USER_MODEL = 'users.CustomerUser'
 LOGIN_URL = "users:login"
 LOGIN_REDIRECT = "main:product_list"
 LOGOUT_USER = "users:login"
-

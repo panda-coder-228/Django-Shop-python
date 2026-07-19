@@ -1,8 +1,6 @@
 from django.db.models.signals import post_migrate, post_save
-from django.contrib.contenttypes.models import ContentType
 from django.dispatch import receiver
 from django.contrib.auth.models import Group, Permission
-from django.template.defaulttags import GroupedResult
 from apps.users.permissions import CUSTOMER_PERMISSIONS, MANAGER_PERMISSINS
 from django.conf import settings
 

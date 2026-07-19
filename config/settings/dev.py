@@ -22,3 +22,5 @@ CACHES = {
         "LOCATION": "unique",
     }
 }
+
+LOGGING["loggers"]["django"]["level"] = "DEBUG"
