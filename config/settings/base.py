@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'apps.users.apps.UsersConfig',
     'apps.core.apps.CoreConfig',
     "apps.banner",
+    "apps.warehouse",
 
 
 ]

@@ -1,13 +1,62 @@
 {% extends "admin/base_site.html" %}
 
+{% block extrastyle %}
+<style>
+    .receipt-form {
+        max-width: 700px;
+    }
+
+    .receipt-form h1 {
+        margin-bottom: 20px;
+    }
+
+    .receipt-form fieldset {
+        padding: 20px;
+    }
+
+    .receipt-form .form-row {
+        margin-bottom: 16px;
+    }
+
+    .receipt-form input,
+    .receipt-form select,
+    .receipt-form textarea {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .submit-row {
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<h1>{{ title }}</h1>
+<div class="receipt-form">
+    <h1>📥 {{ title }}</h1>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <form method="post">
+        {% csrf_token %}
 
-    <input type="submit" value="Зберегти" class="default">
-</form>
+        <fieldset class="module aligned">
+            {% for field in form %}
+                <div class="form-row">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
 
+                    {% if field.help_text %}
+                        <div class="help">{{ field.help_text }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </fieldset>
+
+        <div class="submit-row">
+            <input type="submit" value="📥 Оприбуткувати" class="default">
+            <a href="../" class="button">← Скасувати</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

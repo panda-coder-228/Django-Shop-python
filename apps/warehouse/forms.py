@@ -1,6 +1,6 @@
 from django import forms
 
-from main.models import Product
+from apps.main.models import Product
 from .choices import Reason
 from .models import Warehouse
 

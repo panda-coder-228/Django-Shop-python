@@ -55,17 +55,17 @@ class WarehouseAdmin(admin.ModelAdmin):
         "title",
         "address",
         "is_active",
-        "is_deleted",
+        "is_delete",
     )
 
     list_editable = (
         "is_active",
-        "is_deleted",
+        "is_delete",
     )
 
     list_filter = (
         "is_active",
-        "is_deleted",
+        "is_delete",
     )
 
     search_fields = (

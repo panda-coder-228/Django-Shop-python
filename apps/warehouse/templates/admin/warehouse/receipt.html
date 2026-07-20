@@ -1,13 +1,63 @@
 {% extends "admin/base_site.html" %}
 
+{% block extrastyle %}
+<style>
+    .custom-form {
+        max-width: 700px;
+    }
+
+    .form-row {
+        margin-bottom: 18px;
+    }
+
+    .form-row label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .errorlist {
+        color: #ba2121;
+        margin-bottom: 8px;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<h1>{{ title }}</h1>
+<div class="custom-form">
+    <h1>{{ title }}</h1>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <form method="post">
+        {% csrf_token %}
 
-    <input type="submit" value="Зберегти" class="default">
-</form>
+        <fieldset class="module aligned">
+            {% for field in form %}
+                <div class="form-row">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
 
+                    {% if field.help_text %}
+                        <div class="help">
+                            {{ field.help_text }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </fieldset>
+
+        <div class="submit-row">
+            <input type="submit" value="💾 Зберегти" class="default">
+            <a href="../" class="button">← Скасувати</a>
+        </div>
+    </form>
+</div>
 {% endblock %}
