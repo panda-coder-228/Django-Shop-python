@@ -71,15 +71,17 @@
     
                     <div class="d-flex justify-content-center justify-content-lg-end align-items-center gap-3">
     
-                        <div class="position-relative">
-                            <a href="#">
-                                <img src="{% static 'img/cart.svg' %}" class="img-cart" alt="">
-                            </a>
-    
-                            <span class="cart-quantity">
-                                {{ cart|length }}
-                            </span>
-                        </div>
+                        <div class="position-relative d-inline-block">
+                                <a href="{% url 'cart:cart_detail'  %}" class="text-dark">
+                                    <i class="bi bi-cart fs-5"></i>
+                                </a>
+
+    {% if cart|length %}
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ cart|length }}
+        </span>
+    {% endif %}
+</div>
     
                         {% if user.is_authenticated %}
                             <a href="{% url 'users:profile' %}" class="nav-a m-2">Профіль</a>

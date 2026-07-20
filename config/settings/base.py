@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'apps.core.apps.CoreConfig',
     "apps.banner",
     "apps.warehouse",
+    "apps.cart",
 
 
 ]
@@ -55,6 +56,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'apps.banner.context_processors.banner',
+                'apps.cart.context_processors.cart',
             ],
         },
     },
@@ -112,3 +114,8 @@ AUTH_USER_MODEL = 'users.CustomerUser'
 LOGIN_URL = "users:login"
 LOGIN_REDIRECT = "main:product_list"
 LOGOUT_USER = "users:login"
+
+
+# CART SESSION
+
+CART_SESSION_ID = 'cart'

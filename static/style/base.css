@@ -354,6 +354,7 @@ body{
 .item {
     transition: 0.3s ease;
 }
+
 .home-card {
     position: relative;
     display: flex;

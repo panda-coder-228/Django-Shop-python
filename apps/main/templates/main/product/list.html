@@ -36,51 +36,63 @@
         <div class="items">
             {% for product in products %}
             <div class="item">
-    
-                <a href="{{ product.get_absolute_url }}" class="home-card">
-    
-                    {% if product.discount %}
-                        <span class="discount-badge">
-                            -{{ product.get_discount_percent }}%
-                        </span>
-                    {% endif %}
-    
-                    <div class="image-wrapper">
-                        <img 
-                            src="{% if product.image %}{{ product.image.url }}{% endif %}" 
-                            alt="{{ product.title }}"
-                            class="main-card-image"
-                        >
-                    </div>
-    
-                    <h3 class="product-title">
-                        {{ product.title }}
-                    </h3>
-    
-                    <span class="{% if product.available %}available{% else %}not-available{% endif %}">
-                        {{ product.available|yesno:"В наличии,Нет в наличии" }}
-                    </span>
-    
-    
-                    {% if product.discount %}
-                        <div class="card-discount">
-                            <p class="old-price">
-                                ${{ product.price }}
-                            </p>
-    
-                            <p class="new-price">
-                                ${{ product.sell_price }}
-                            </p>
-                        </div>
-                    {% else %}
-                        <p class="price">
-                            ${{ product.price }}
-                        </p>
-                    {% endif %}
-    
-                </a>
-    
+    <div class="home-card">
+
+        <a href="{{ product.get_absolute_url }}" class="card-link">
+
+            {% if product.discount %}
+                <span class="discount-badge">
+                    -{{ product.get_discount_percent }}%
+                </span>
+            {% endif %}
+
+            <div class="image-wrapper">
+                <img
+                    src="{% if product.image %}{{ product.image.url }}{% endif %}"
+                    alt="{{ product.title }}"
+                    class="main-card-image"
+                >
             </div>
+
+            <h3 class="product-title">
+                {{ product.title }}
+            </h3>
+
+            <span class="{% if product.available %}available{% else %}not-available{% endif %}">
+                {{ product.available|yesno:"В наличии,Нет в наличии" }}
+            </span>
+
+            {% if product.discount %}
+                <div class="card-discount">
+                    <p class="old-price">
+                        ${{ product.price }}
+                    </p>
+
+                    <p class="new-price">
+                        ${{ product.sell_price }}
+                    </p>
+                </div>
+            {% else %}
+                <p class="price">
+                    ${{ product.price }}
+                </p>
+            {% endif %}
+
+        </a>
+
+        <form action="{% url 'cart:cart_add' product.id %}" method="post" class="cart-form ">
+            {% csrf_token %}
+            
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="override" value="False">
+
+            <button type="submit" class="btn btn-primary w-100 ">
+                Добавить в корзину
+            </button>
+        </form>
+
+    </div>
+</div>
             {% endfor %}
         </div>
     </div>

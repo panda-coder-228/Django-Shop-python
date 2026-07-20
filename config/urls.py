@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("shop/", include("apps.main.urls", namespace="main") ),
     path("users/", include("apps.users.urls", namespace="users") ),
+    path("cart/", include("apps.cart.urls", namespace="cart"))
 ]
 
 if settings.DEBUG:

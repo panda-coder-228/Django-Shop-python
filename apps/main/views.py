@@ -2,11 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from decimal import Decimal
 from django.core.paginator import Paginator
 from apps.main.models import Category, Product
+from apps.cart.forms import CartAddProductForm
 
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, available=True)
-    return render(request, "main/product/detail.html", {'product':product})
+    cart_add = CartAddProductForm()
+    return render(request, "main/product/detail.html", {'product':product, "cart_add": cart_add})
 
 def product_list(request, category_slug=None):
     page = request.GET.get("page", 1)
@@ -20,13 +22,16 @@ def product_list(request, category_slug=None):
     paginator = Paginator(products, 8)
     page_obj= paginator.get_page(page)
     
+    cart_add = CartAddProductForm()
+
     context = {
         "category": category,
         "categories":categories,
         "popular_product": popular_product,
         "products":page_obj.object_list,
         "page_obj": page_obj,
-        "category_slug": category_slug
+        "category_slug": category_slug,
+        "cart_add": cart_add,
     }
     return render(request, "main/product/list.html", context)
 
