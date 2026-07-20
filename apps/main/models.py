@@ -4,7 +4,7 @@ from django.utils.text import slugify
 from django.urls import  reverse
 from apps.main.utils import category_image_path
 from apps.main.validators import validator_price, validator_discount, validator_category_title
-
+import uuid
 
 class Category(models.Model):
     title = models.CharField("Каталог", max_length=50, unique=True, validators=[validator_category_title])
@@ -37,6 +37,7 @@ class Product(models.Model):
     price = models.DecimalField("Цена", max_digits=10, decimal_places=2, validators=[validator_price])
     discount = models.DecimalField("Скидка%", max_digits=4, decimal_places=2, validators=[validator_discount], default=0)
     is_popular = models.BooleanField("Популярний товар", default=False)
+    sku = models.CharField("Артикул", max_length=50,  unique=True, db_index=True, editable=True, blank=True ,null=True)
     sold_count = models.PositiveIntegerField("Продано товара", default=0)
     views = models.PositiveIntegerField("Просмотри", default=0)
     created_at = models.DateTimeField("Дата створення", auto_now_add=True)
@@ -70,7 +71,9 @@ class Product(models.Model):
     def get_discount_percent(self):
         return round(self.discount, 0)
     
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
+        is_new = self.pk is None
+
         if not self.slug:
             base_slug = slugify(self.title)
             slug = base_slug
@@ -79,7 +82,13 @@ class Product(models.Model):
             while Product.objects.filter(slug=slug).exclude(pk=self.pk).exists():
                 slug = f"{base_slug}-{num}"
                 num += 1
+
             self.slug = slug
+
+            super().save(*args, **kwargs)
+
+        if is_new and not self.sku:
+            self.sku = f"SKU-{uuid.uuid4().hex[:8].upper()}"
         super().save(*args, **kwargs)
 
 class ProductImage(models.Model):
