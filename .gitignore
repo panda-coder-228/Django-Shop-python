@@ -11,3 +11,5 @@ venv/
 media/
 staticfiles/
 static_root/
+
+logs/
