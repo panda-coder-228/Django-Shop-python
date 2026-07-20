@@ -88,7 +88,7 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
-        "apps.users":{
+        "users":{
             "handlers":["users_file", "errors_file"],
             "level":"INFO",
             "propagate": False,
