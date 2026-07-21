@@ -3,6 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCr
 from apps.users.models import CustomerUser
 from apps.core.forms.mixins import BootstrapFormMixin
 from django.core.validators import MinLengthValidator
+from django.contrib.auth.forms import PasswordResetForm
 
 class LoginUserForm(BootstrapFormMixin, AuthenticationForm):
     username = forms.EmailField(label="Email")
@@ -44,3 +45,7 @@ class UserProfileForm(BootstrapFormMixin, UserChangeForm):
             "about": forms.Textarea(attrs={"rows" :4, "class": "resize-none"}),
             "birthday": forms.DateInput(attrs={"type": "date"})
         }
+
+class  PasswordResetUserForm(BootstrapFormMixin, PasswordResetForm):
+    pass
+    

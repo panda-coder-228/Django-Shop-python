@@ -1,10 +1,12 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .forms import LoginUserForm, UserRegistrationForm, UserProfileForm
 from django.db.models import Prefetch
 from .utils import redirect_with_next, client_ip
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from .forms import PasswordResetUserForm
 import logging
 import time
 
@@ -152,3 +154,11 @@ def profile(request):
         form = UserProfileForm(instance=request.user)
 
     return render(request, "users/profile.html", {"form": form})
+
+
+class UserPasswordResetView(PasswordResetView):
+    form_class = PasswordResetUserForm
+    template_name = "password_user/password_reset_form.html"
+    email_template_name = "password_user/password_reset_email.txt"
+    html_email_template_name = "password_user/password_reset_email.html"
+    success_url = reverse_lazy("users:password_reset_done")

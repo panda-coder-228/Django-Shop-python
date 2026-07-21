@@ -17,7 +17,7 @@
             <div class="row justify-content-center g-4">
                 {# lift part #}
                 <div class="col-12 col-sm-5 col-md-4 col-lg-4">
-                    {% if user.image %}
+                    {% if user.avatar %}
                         <img src="{{ user.image.url }}" alt="avatar" class="img-fluid mb-2" style="max-width: 150px; max-height:130px;">
                     {% endif %}
                     <input type="file" name="image" id="id_image" class="form-control w-100" accept="image/*">
@@ -129,6 +129,7 @@
                 {# Кнопка #}
                     <div class="d-flex justify-content-end gap-3 mt-3">
                         <button type="submit" class="btn btn-primary m-3">Зберегти</button>
+                        <a href="{% url 'users:password_change' %}" class="btn btn-warning m-3">Змінити пароль</a>
                         <a href="{% url 'users:logout' %}" class="btn btn-secondary m-3">Вихід</a>
                     </div>
             </div>
